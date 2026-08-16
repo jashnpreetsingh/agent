@@ -5,8 +5,8 @@ cassette. Recorded once, an entire agent run replays offline and
 deterministically, which is what lets the evaluation suite run in CI with no
 API key and no dependence on NCBI being up.
 
-Cassettes are plain JSON keyed by a hash of the canonicalised request, so a
-reviewer can open one and read exactly what was sent and returned.
+Cassettes are plain JSON keyed by a hash of the canonicalised request, so you
+can open one and read exactly what was sent and returned.
 """
 
 from __future__ import annotations

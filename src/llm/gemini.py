@@ -2,8 +2,8 @@
 
 Talks to the Generative Language REST API directly (no vendor SDK), which
 keeps the dependency surface small and makes every request/response shape
-visible in the trace - useful when the point of the exercise is to show how
-the agent works.
+visible in the trace, which matters when the agent's behaviour has to be
+auditable after the fact.
 
 Reliability behaviour:
   * exponential backoff with jitter on 429/500/503/504 and transport errors;

@@ -127,7 +127,7 @@ against the real API.
 
 ### Advanced techniques
 
-The brief asks for at least one. This implements four:
+Four are implemented:
 
 - **RAG** — abstracts are embedded and cosine-ranked against the question, then selected
   under a character budget. The default embedding model (`nvidia/nv-embedqa-e5-v5`) is
@@ -198,7 +198,7 @@ disagreement is a runtime 400 rather than a type error:
 These are declared as overridable settings per provider rather than sniffed from the model
 name, and the resulting request bodies are
 [asserted in tests](tests/test_provider_compat.py) against a mock transport — so the
-portability claim is checked without needing three API keys.
+portability claim is verified without needing three API keys.
 
 > **Rate limits differ sharply.** The Gemini free tier allows **5 requests per minute**
 > and one question costs 5–8 calls, so questions in sequence will throttle. The client
@@ -227,7 +227,7 @@ python -m src.cli --query "What are the latest treatment options for Type 2 diab
 # Basic question
 python -m src.cli --query "Do SGLT2 inhibitors reduce heart failure hospitalisation?"
 
-# The exact form from the brief also works
+# Direct script invocation works too
 python src/agent.py --domain healthcare --query "What are the latest treatment options for Type 2 diabetes?"
 
 # Show the full reasoning trace
@@ -291,7 +291,7 @@ python -m src.evaluate --llm-mode replay --pubmed-mode replay
 
 | # | Scenario | What it proves |
 | --- | --- | --- |
-| 1 | `t2d_treatment_options` | The brief's own example: planning, multi-round retrieval, synthesis, citation integrity. |
+| 1 | `t2d_treatment_options` | The broad happy path: planning, multi-round retrieval, synthesis, citation integrity. |
 | 2 | `lay_language_vocabulary` | Lay phrasing reaches controlled vocabulary rather than being searched literally. |
 | 3 | `emergency_refusal` | A medical emergency is refused **before any LLM call**, naming emergency services. |
 | 4 | `personal_advice_refusal` | Individual treatment decisions are declined and redirected, with a usable alternative. |
@@ -306,6 +306,9 @@ never retrieved?" is set arithmetic with an unambiguous answer.
 `--judge` adds an LLM judge scoring groundedness, relevance, and calibration 1–5. Those
 scores are **reported but never gate the verdict**: one model's opinion of another's
 output is evidence, not proof.
+
+Recorded fixtures make the whole suite reproducible offline — `--llm-mode replay
+--pubmed-mode replay` runs all five scenarios in about a second with no API key.
 
 ### Latest results
 
@@ -459,8 +462,8 @@ records exactly what was removed.
   resolves correctly; an invented colloquialism like "sugar disease" falls back to its
   component words.
 - **English-language literature only.**
-- **Latency.** A full research question takes 1–3 minutes. Recorded fixtures exist so
-  reviewers do not have to pay that cost to see it work.
+- **Latency.** A full research question takes 1–3 minutes. Recorded fixtures exist so the
+  project can be explored without paying that cost.
 
 ---
 

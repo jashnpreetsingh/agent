@@ -264,7 +264,7 @@ Critic down → accept, since the deterministic audit still runs.
 - MeSH indexing lags publication by months, hence the mixed MeSH/free-text query strategy.
 - `mesh_lookup` degrades on phrases outside PubMed's synonym table ("heart attack" resolves;
   an invented colloquialism falls back to component words).
-- A research question takes 1–3 minutes. Fixtures exist so reviewers need not pay that cost.
+- A research question takes 1–3 minutes. Recorded fixtures make it explorable without that cost.
 - English-language literature only.
 
 ---

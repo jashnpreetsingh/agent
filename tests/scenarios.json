@@ -5,7 +5,7 @@
       "id": "t2d_treatment_options",
       "title": "Broad treatment question (primary happy path)",
       "question": "What are the latest treatment options for Type 2 diabetes?",
-      "rationale": "The brief's own example. Exercises planning, multi-round retrieval, ranking, synthesis, and citation verification end to end.",
+      "rationale": "The broad happy path. Exercises planning, multi-round retrieval, ranking, synthesis, and citation verification end to end.",
       "expect": {
         "answered": true,
         "min_claims": 3,

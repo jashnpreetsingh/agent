@@ -7,8 +7,8 @@ harness can substitute fakes for the provider or the tool registry.
 
 from __future__ import annotations
 
-# Supports `python src/agent.py …` (the form shown in the brief) alongside
-# `python -m src.cli`. Run as a script there is no package context, so the
+# Supports `python src/agent.py …` alongside `python -m src.cli`.
+# Run as a script there is no package context, so the
 # repository root has to reach sys.path *before* the `src.` imports below —
 # doing it in the __main__ block at the bottom would already be too late.
 if __name__ == "__main__" and __package__ in (None, ""):  # pragma: no cover
