@@ -7,6 +7,16 @@ harness can substitute fakes for the provider or the tool registry.
 
 from __future__ import annotations
 
+# Supports `python src/agent.py …` (the form shown in the brief) alongside
+# `python -m src.cli`. Run as a script there is no package context, so the
+# repository root has to reach sys.path *before* the `src.` imports below —
+# doing it in the __main__ block at the bottom would already be too late.
+if __name__ == "__main__" and __package__ in (None, ""):  # pragma: no cover
+    import sys as _sys
+    from pathlib import Path as _Path
+
+    _sys.path.insert(0, str(_Path(__file__).resolve().parent.parent))
+
 import uuid
 from dataclasses import dataclass, field
 from typing import Any
@@ -153,12 +163,8 @@ __all__ = ["PubMedAgent", "RunResult", "answer_question", "EvidenceGrade"]
 
 
 if __name__ == "__main__":  # pragma: no cover
-    # Supports the `python src/agent.py --domain healthcare --query "..."` form
-    # shown in the assignment brief, alongside `python -m src.cli`.
     import sys
-    from pathlib import Path
 
-    sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
     from src.cli import main
 
     sys.exit(main())
