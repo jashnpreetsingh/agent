@@ -56,7 +56,7 @@ follow from that:
 
 ## Architecture
 
-Four specialist roles rather than one general loop. Each has a narrow contract, which
+Five specialist roles rather than one general loop. Each has a narrow contract, which
 keeps every prompt short enough to be effective and makes each hand-off inspectable.
 
 ```mermaid
@@ -76,7 +76,8 @@ flowchart TD
     RANK --> SYN[SYNTHESIZER<br/>claims, each cited]
     SYN --> CRIT{CRITIC<br/>self-review}
 
-    CRIT -->|revise ≤1, with gaps| RES
+    CRIT -->|revise: gather more evidence| RES
+    CRIT -->|rewrite: research budget spent| SYN
     CRIT -->|accept| OUT[output guardrail<br/>verify every PMID]
     OUT --> ENDN
 
@@ -134,7 +135,7 @@ The brief asks for at least one. This implements four:
   what these retrieval models are trained for.
 - **Self-critique** — the critic reviews grounding, completeness, and calibration, and can
   send the researcher back for one more round with specific gaps to close.
-- **Multi-agent collaboration** — four roles with distinct prompts and contracts.
+- **Multi-agent collaboration** — five roles with distinct prompts and contracts.
 - **Few-shot prompting** — the planner and synthesizer carry worked examples, including a
   deliberate *negative* example showing an overreaching claim and why it is wrong.
 
@@ -256,11 +257,15 @@ full reasoning trace in an expander.
 
 ```bash
 docker build -t pubmed-agent .
-docker run --rm -e GEMINI_API_KEY=your-key pubmed-agent \
+docker run --rm -e NVIDIA_API_KEY=your-key pubmed-agent \
+  --query "What are the latest treatment options for Type 2 diabetes?"
+
+# No key at all: the committed fixtures replay offline
+docker run --rm -e LLM_MODE=replay -e PUBMED_MODE=replay pubmed-agent \
   --query "What are the latest treatment options for Type 2 diabetes?"
 
 # UI
-docker run --rm -p 8501:8501 -e GEMINI_API_KEY=your-key \
+docker run --rm -p 8501:8501 -e NVIDIA_API_KEY=your-key \
   --entrypoint streamlit pubmed-agent run src/ui/app.py --server.address 0.0.0.0
 ```
 
@@ -354,7 +359,7 @@ pipeline, which stays citation-grounded anyway.
 
 Every run writes JSONL to `traces/run-<id>.jsonl` — one event per node, tool call, retry,
 budget stop, and guardrail decision, with inputs, outputs, timings, and token counts
-(including Gemini's `thoughtsTokenCount`, so hidden reasoning spend is visible).
+(including reasoning tokens, so hidden reasoning spend is visible rather than silent).
 
 ```bash
 python -m src.cli --query "..." --show-trace                    # render to terminal
@@ -425,7 +430,9 @@ a model for it would be slower, costlier, non-deterministic, and no better.
 abstracts are cached separately for ranking. Keeps the tool loop cheap in tokens.
 
 **Global budgets, not per-loop.** A revision round draws from the same tool budget as the
-first pass, so total spend per question is bounded regardless of the path taken.
+first pass, so total spend per question is bounded regardless of the path taken. When that
+budget is already spent, the critic routes to a rewrite instead of back to the researcher —
+re-asking a researcher that cannot call tools buys nothing.
 
 **Two-stage cassette lookup.** Exact request hash first, then the next unconsumed
 recording with the same purpose. Pure hash matching is too brittle for replay: request *N*
@@ -452,8 +459,8 @@ records exactly what was removed.
   resolves correctly; an invented colloquialism like "sugar disease" falls back to its
   component words.
 - **English-language literature only.**
-- **Latency.** A full research question takes 5–7 minutes on the default reasoning model.
-  Recorded fixtures exist so reviewers do not have to pay that cost to see it work.
+- **Latency.** A full research question takes 1–3 minutes. Recorded fixtures exist so
+  reviewers do not have to pay that cost to see it work.
 
 ---
 
