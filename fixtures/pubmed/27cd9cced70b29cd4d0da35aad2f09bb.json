@@ -1,0 +1,46 @@
+{
+  "namespace": "pubmed",
+  "key": "27cd9cced70b29cd4d0da35aad2f09bb",
+  "meta": {
+    "endpoint": "esearch.fcgi"
+  },
+  "request": {
+    "endpoint": "esearch.fcgi",
+    "params": {
+      "db": "pubmed",
+      "term": "(\"Sodium-Glucose Transporter 2 Inhibitors\"[MeSH Terms] AND \"Diabetes Mellitus, Type 2\"[MeSH Terms] AND (\"Myocardial Infarction\"[MeSH Terms] OR \"Cardiovascular Diseases\"[MeSH Terms])) AND (\"Randomized Controlled Trial\"[Publication Type] OR \"Meta-Analysis\"[Publication Type]) AND (\"2015\"[Date - Publication] : \"3000\"[Date - Publication])",
+      "retmax": "12",
+      "retmode": "json",
+      "sort": "relevance",
+      "tool": "pubmed-evidence-agent",
+      "email": "agent@example.com"
+    }
+  },
+  "response": {
+    "header": {
+      "type": "esearch",
+      "version": "0.3"
+    },
+    "esearchresult": {
+      "count": "586",
+      "retmax": "12",
+      "retstart": "0",
+      "idlist": [
+        "36331190",
+        "36041474",
+        "32865377",
+        "36351458",
+        "36027570",
+        "33441402",
+        "41203232",
+        "35228754",
+        "32877652",
+        "37024129",
+        "30424892",
+        "38914124"
+      ],
+      "translationset": [],
+      "querytranslation": "\"Sodium-Glucose Transporter 2 Inhibitors\"[MeSH Terms] AND \"diabetes mellitus, type 2\"[MeSH Terms] AND (\"Myocardial Infarction\"[MeSH Terms] OR \"Cardiovascular Diseases\"[MeSH Terms]) AND (\"Randomized Controlled Trial\"[Publication Type] OR \"Meta-Analysis\"[Publication Type]) AND 2015/01/01:3000/12/31[Date - Publication]"
+    }
+  }
+}

@@ -1,0 +1,63 @@
+{
+  "namespace": "pubmed",
+  "key": "e2e5a89061c7e70e61593691b80bc149",
+  "meta": {
+    "endpoint": "esearch.fcgi"
+  },
+  "request": {
+    "endpoint": "esearch.fcgi",
+    "params": {
+      "db": "pubmed",
+      "term": "((Vitamin D[MeSH Terms] OR vitamin D[All Fields]) AND (baseline[All Fields] OR status[All Fields]) AND Respiratory Tract Infections[MeSH Terms])",
+      "retmax": "12",
+      "retmode": "json",
+      "sort": "relevance",
+      "tool": "pubmed-evidence-agent",
+      "email": "agent@example.com"
+    }
+  },
+  "response": {
+    "header": {
+      "type": "esearch",
+      "version": "0.3"
+    },
+    "esearchresult": {
+      "count": "720",
+      "retmax": "12",
+      "retstart": "0",
+      "idlist": [
+        "28202713",
+        "34322844",
+        "32679784",
+        "37686873",
+        "36857810",
+        "30675873",
+        "36287374",
+        "39993397",
+        "35198149",
+        "26521023",
+        "39596272",
+        "34886758"
+      ],
+      "translationset": [
+        {
+          "from": "Vitamin D[MeSH Terms]",
+          "to": "\"vitamin d\"[MeSH Terms] OR \"ergocalciferols\"[MeSH Terms]"
+        },
+        {
+          "from": "vitamin D[All Fields]",
+          "to": "\"vitamin d\"[Supplementary Concept] OR \"vitamin d\"[All Fields] OR \"ergocalciferols\"[Supplementary Concept] OR \"ergocalciferols\"[All Fields] OR \"vitamin d\"[MeSH Terms] OR \"ergocalciferols\"[MeSH Terms]"
+        },
+        {
+          "from": "baseline[All Fields]",
+          "to": "\"baseline dental cement\"[Supplementary Concept] OR \"baseline dental cement\"[All Fields] OR \"baseline\"[All Fields] OR \"baselines\"[All Fields]"
+        },
+        {
+          "from": "Respiratory Tract Infections[MeSH Terms]",
+          "to": "\"respiratory tract infections\"[MeSH Terms]"
+        }
+      ],
+      "querytranslation": "(\"vitamin d\"[MeSH Terms] OR \"ergocalciferols\"[MeSH Terms] OR (\"vitamin d\"[Supplementary Concept] OR \"vitamin d\"[All Fields] OR \"ergocalciferols\"[Supplementary Concept] OR \"ergocalciferols\"[All Fields] OR \"vitamin d\"[MeSH Terms] OR \"ergocalciferols\"[MeSH Terms])) AND (\"baseline dental cement\"[Supplementary Concept] OR \"baseline dental cement\"[All Fields] OR \"baseline\"[All Fields] OR \"baselines\"[All Fields] OR \"status\"[All Fields]) AND \"respiratory tract infections\"[MeSH Terms]"
+    }
+  }
+}

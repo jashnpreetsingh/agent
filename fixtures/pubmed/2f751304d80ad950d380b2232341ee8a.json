@@ -1,0 +1,59 @@
+{
+  "namespace": "pubmed",
+  "key": "2f751304d80ad950d380b2232341ee8a",
+  "meta": {
+    "endpoint": "esearch.fcgi"
+  },
+  "request": {
+    "endpoint": "esearch.fcgi",
+    "params": {
+      "db": "pubmed",
+      "term": "((tirzepatide OR semaglutide) AND Diabetes Mellitus, Type 2[MeSH Terms]) AND (\"Randomized Controlled Trial\"[Publication Type]) AND (\"2022\"[Date - Publication] : \"3000\"[Date - Publication])",
+      "retmax": "12",
+      "retmode": "json",
+      "sort": "relevance",
+      "tool": "pubmed-evidence-agent",
+      "email": "agent@example.com"
+    }
+  },
+  "response": {
+    "header": {
+      "type": "esearch",
+      "version": "0.3"
+    },
+    "esearchresult": {
+      "count": "190",
+      "retmax": "12",
+      "retstart": "0",
+      "idlist": [
+        "39536238",
+        "37952131",
+        "38785209",
+        "40162642",
+        "41406444",
+        "36216945",
+        "40169145",
+        "37385275",
+        "35131037",
+        "40156843",
+        "40975112",
+        "35133415"
+      ],
+      "translationset": [
+        {
+          "from": "tirzepatide",
+          "to": "\"tirzepatide\"[Supplementary Concept] OR \"tirzepatide\"[All Fields] OR \"tirzepatide\"[MeSH Terms]"
+        },
+        {
+          "from": "semaglutide",
+          "to": "\"semaglutide\"[Supplementary Concept] OR \"semaglutide\"[All Fields] OR \"semaglutide\"[MeSH Terms]"
+        },
+        {
+          "from": "Diabetes Mellitus, Type 2[MeSH Terms]",
+          "to": "\"diabetes mellitus, type 2\"[MeSH Terms]"
+        }
+      ],
+      "querytranslation": "(\"tirzepatide\"[Supplementary Concept] OR \"tirzepatide\"[All Fields] OR \"tirzepatide\"[MeSH Terms] OR (\"semaglutide\"[Supplementary Concept] OR \"semaglutide\"[All Fields] OR \"semaglutide\"[MeSH Terms])) AND \"diabetes mellitus, type 2\"[MeSH Terms] AND \"Randomized Controlled Trial\"[Publication Type] AND 2022/01/01:3000/12/31[Date - Publication]"
+    }
+  }
+}

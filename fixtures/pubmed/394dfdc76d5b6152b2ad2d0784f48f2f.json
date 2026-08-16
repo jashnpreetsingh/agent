@@ -1,0 +1,59 @@
+{
+  "namespace": "pubmed",
+  "key": "394dfdc76d5b6152b2ad2d0784f48f2f",
+  "meta": {
+    "endpoint": "esearch.fcgi"
+  },
+  "request": {
+    "endpoint": "esearch.fcgi",
+    "params": {
+      "db": "pubmed",
+      "term": "((Sodium-Glucose Transporter 2 Inhibitors[MeSH Terms] OR Glucagon-Like Peptide-1 Receptor Agonists[MeSH Terms]) AND (cardiovascular outcomes[All Fields] OR Kidney Diseases[MeSH Terms])) AND (\"Meta-Analysis\"[Publication Type] OR \"Randomized Controlled Trial\"[Publication Type]) AND (\"2020\"[Date - Publication] : \"3000\"[Date - Publication])",
+      "retmax": "12",
+      "retmode": "json",
+      "sort": "relevance",
+      "tool": "pubmed-evidence-agent",
+      "email": "agent@example.com"
+    }
+  },
+  "response": {
+    "header": {
+      "type": "esearch",
+      "version": "0.3"
+    },
+    "esearchresult": {
+      "count": "498",
+      "retmax": "12",
+      "retstart": "0",
+      "idlist": [
+        "37952131",
+        "38785209",
+        "40470996",
+        "41406444",
+        "40162642",
+        "36331190",
+        "32970396",
+        "32865377",
+        "33441402",
+        "40156846",
+        "36351458",
+        "41203232"
+      ],
+      "translationset": [
+        {
+          "from": "Sodium-Glucose Transporter 2 Inhibitors[MeSH Terms]",
+          "to": "\"sodium-glucose transporter 2 inhibitors\"[MeSH Terms]"
+        },
+        {
+          "from": "Glucagon-Like Peptide-1 Receptor Agonists[MeSH Terms]",
+          "to": "\"glucagon-like peptide-1 receptor agonists\"[MeSH Terms]"
+        },
+        {
+          "from": "Kidney Diseases[MeSH Terms]",
+          "to": "\"kidney diseases\"[MeSH Terms]"
+        }
+      ],
+      "querytranslation": "(\"sodium glucose transporter 2 inhibitors\"[MeSH Terms] OR \"glucagon like peptide 1 receptor agonists\"[MeSH Terms]) AND (\"cardiovascular outcomes\"[All Fields] OR \"kidney diseases\"[MeSH Terms]) AND (\"Meta-Analysis\"[Publication Type] OR \"Randomized Controlled Trial\"[Publication Type]) AND 2020/01/01:3000/12/31[Date - Publication]"
+    }
+  }
+}

@@ -1,0 +1,76 @@
+{
+  "entries": [
+    {
+      "key": "a4912ca794a802162a1f99c095cb6674",
+      "purpose": "esearch.fcgi"
+    },
+    {
+      "key": "0e84f69e277e8655e8e89eb4e302d468",
+      "purpose": "efetch.fcgi"
+    },
+    {
+      "key": "2f751304d80ad950d380b2232341ee8a",
+      "purpose": "esearch.fcgi"
+    },
+    {
+      "key": "7a3620d8f4f97aa0f2746ece374d732c",
+      "purpose": "efetch.fcgi"
+    },
+    {
+      "key": "394dfdc76d5b6152b2ad2d0784f48f2f",
+      "purpose": "esearch.fcgi"
+    },
+    {
+      "key": "08593567310d81a01121d448c73ff047",
+      "purpose": "efetch.fcgi"
+    },
+    {
+      "key": "d31a62575758356769303c0e9c014af0",
+      "purpose": "esearch.fcgi"
+    },
+    {
+      "key": "6052a72a81cbdc01efc7b1cace114bec",
+      "purpose": "efetch.fcgi"
+    },
+    {
+      "key": "af45ef1b8ba50b98b18ec4c288f7f74b",
+      "purpose": "esearch.fcgi"
+    },
+    {
+      "key": "175695f1608f643740b942c4378cf3db",
+      "purpose": "efetch.fcgi"
+    },
+    {
+      "key": "27cd9cced70b29cd4d0da35aad2f09bb",
+      "purpose": "esearch.fcgi"
+    },
+    {
+      "key": "f5375ee7ccbfbac67be7e0025234431f",
+      "purpose": "efetch.fcgi"
+    },
+    {
+      "key": "cb0a350abf9d7ce6aaee56eb2e57d2a4",
+      "purpose": "esearch.fcgi"
+    },
+    {
+      "key": "be7b33996abf34610c397dc046b9366c",
+      "purpose": "efetch.fcgi"
+    },
+    {
+      "key": "6d70b749aa9d11c086ab8c505111aab9",
+      "purpose": "esearch.fcgi"
+    },
+    {
+      "key": "b646c4c3c9ac38bf901b541801a3d468",
+      "purpose": "efetch.fcgi"
+    },
+    {
+      "key": "e2e5a89061c7e70e61593691b80bc149",
+      "purpose": "esearch.fcgi"
+    },
+    {
+      "key": "49e051d5a07f7901b83147f39cfb1188",
+      "purpose": "efetch.fcgi"
+    }
+  ]
+}

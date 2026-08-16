@@ -1,0 +1,14 @@
+# Core
+langgraph==1.2.11
+langchain-core==1.5.5
+pydantic==2.13.4
+pydantic-settings==2.15.0
+httpx==0.28.1
+python-dotenv==1.2.2
+
+# CLI + UI
+rich==15.0.0
+streamlit==1.61.1
+
+# Testing
+pytest==9.1.1

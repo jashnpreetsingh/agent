@@ -1,0 +1,211 @@
+{
+  "namespace": "llm",
+  "key": "51f5b94192bc74cfa53a9c153f38c68a",
+  "meta": {
+    "purpose": "researcher.3"
+  },
+  "request": {
+    "path": "/chat/completions",
+    "body": {
+      "model": "nvidia/nemotron-3.5-lightning-30b-a3b",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are part of a biomedical evidence-retrieval system that answers questions using published literature from PubMed.\n\nNon-negotiable rules for every role in this system:\n- Published evidence is the only source of truth. Never rely on unstated background knowledge.\n- Never invent a PMID, author, journal, statistic, or finding. If it is not in the retrieved records, it does not exist for your purposes.\n- You inform; you do not treat. Never give personalised medical advice, dosing, or diagnosis.\n- Uncertainty is information. Say plainly when evidence is thin, mixed, or absent.\n\nYou are the Researcher in a biomedical evidence-retrieval system.\n\nYou have PubMed tools. Your job is to gather enough high-quality evidence to answer the\nquestion, then stop. You do not write the final answer.\n\nWork in a loop: decide what is still missing, call a tool, read the result, decide again.\n\nTool guidance:\n- mesh_lookup: call first when the question uses lay or ambiguous wording, so you search\n  the vocabulary PubMed actually indexes.\n- pubmed_search: your main tool. Abstracts from results are retained automatically for\n  synthesis, so you do not need to fetch them separately.\n- fetch_abstracts: only when a title is ambiguous and the abstract decides whether the\n  record is relevant.\n\nWhen a search returns nothing, diagnose before retrying. The usual causes, in order:\ntoo many AND clauses, a publication-type filter no paper satisfies, a date window that is\ntoo narrow, or a MeSH heading that does not exist. Change one thing at a time.\n\nStop calling tools as soon as the evidence covers the sub-questions. Signs you are done:\neach sub-question has at least one directly relevant record, and further searches are\nreturning records you have already seen. Over-searching burns quota and adds noise.\n\nWhen you are finished, reply with a short plain-text summary of what you found and which\nsub-questions remain uncovered. Do not call another tool in that final turn."
+        },
+        {
+          "role": "user",
+          "content": "<question>Does vitamin D supplementation prevent acute respiratory tract infections?</question>\n\n<interpretation>The user asks whether vitamin D supplementation prevents acute respiratory tract infections in humans. This is a prevention efficacy question; ambiguities include population age, baseline vitamin D status, dosage, and formulation.</interpretation>\n\n<sub_questions>\n  - Does vitamin D supplementation prevent acute respiratory tract infections in adults?\n  - Does vitamin D supplementation prevent acute respiratory tract infections in children?\n  - Does baseline vitamin D status modify the preventive effect of supplementation on acute respiratory tract infections?\n</sub_questions>\n\n<suggested_mesh_terms>Vitamin D, Respiratory Tract Infections</suggested_mesh_terms>\n\n<planned_searches>\n  1. Vitamin D[MeSH Terms] AND Respiratory Tract Infections[MeSH Terms] AND (clinical trial[Publication Type] OR review[Publication Type])\n     filters: pub_types=['Clinical Trial', 'Review']\n     rationale: Establishes the overall evidence base for vitamin D and respiratory tract infections from indexed trials and reviews.\n  2. Vitamin D[All Fields] AND acute respiratory tract infection[All Fields] AND (placebo[All Fields] OR no treatment[All Fields])\n     filters: pub_types=['Randomized Controlled Trial']\n     rationale: Captures free-text studies on supplementation versus control for prevention of acute infections.\n  3. (Vitamin D[MeSH Terms] OR vitamin D[All Fields]) AND (baseline[All Fields] OR status[All Fields]) AND Respiratory Tract Infections[MeSH Terms]\n     filters: pub_types=['Observational Study']\n     rationale: Explores effect modification by baseline vitamin D status on infection outcomes.\n</planned_searches>\n\nExecute this plan. Treat the planned searches as a starting point, not a script - adapt them based on what each result tells you. Begin with the highest-value search."
+        },
+        {
+          "role": "assistant",
+          "content": "",
+          "tool_calls": [
+            {
+              "id": "call-7ea7eb76-1f2f-4160-9ac1-5f78de535afb",
+              "type": "function",
+              "function": {
+                "name": "pubmed_search",
+                "arguments": "{\"query\": \"Vitamin D[MeSH Terms] AND Respiratory Tract Infections[MeSH Terms] AND (clinical trial[Publication Type] OR review[Publication Type])\", \"max_results\": 20}"
+              }
+            }
+          ]
+        },
+        {
+          "role": "tool",
+          "tool_call_id": "call-7ea7eb76-1f2f-4160-9ac1-5f78de535afb",
+          "name": "pubmed_search",
+          "content": "{\"executed_query\": \"(Vitamin D[MeSH Terms] AND Respiratory Tract Infections[MeSH Terms] AND (clinical trial[Publication Type] OR review[Publication Type]))\", \"total_matches\": 615, \"returned\": 12, \"results\": [{\"pmid\": \"36282253\", \"title\": \"Hypercalcemia: A Review.\", \"year\": 2022, \"journal\": \"JAMA\", \"publication_types\": [\"Review\", \"Journal Article\"], \"has_abstract\": true}, {\"pmid\": \"36235587\", \"title\": \"Is Melatonin the \\\"Next Vitamin D\\\"?: A Review of Emerging Science, Clinical Uses, Safety, and Dietary Supplements.\", \"year\": 2022, \"journal\": \"Nutrients\", \"publication_types\": [\"Journal Article\", \"Review\"], \"has_abstract\": true}, {\"pmid\": \"36081299\", \"title\": \"Advances in muscle health and nutrition: A toolkit for healthcare professionals.\", \"year\": 2022, \"journal\": \"Clin Nutr\", \"publication_types\": [\"Journal Article\", \"Review\", \"Research Support, Non-U.S. Gov't\"], \"has_abstract\": true}, {\"pmid\": \"34322844\", \"title\": \"Vitamin D, infections and immunity.\", \"year\": 2022, \"journal\": \"Rev Endocr Metab Disord\", \"publication_types\": [\"Journal Article\", \"Research Support, Non-U.S. Gov't\", \"Review\"], \"has_abstract\": true}, {\"pmid\": \"34827621\", \"title\": \"The Effects of Vitamin D on Immune System and Inflammatory Diseases.\", \"year\": 2021, \"journal\": \"Biomolecules\", \"publication_types\": [\"Journal Article\", \"Review\"], \"has_abstract\": true}, {\"pmid\": \"37686873\", \"title\": \"Infections and Autoimmunity-The Immune System and Vitamin D: A Systematic Review.\", \"year\": 2023, \"journal\": \"Nutrients\", \"publication_types\": [\"Systematic Review\", \"Journal Article\"], \"has_abstract\": true}, {\"pmid\": \"36857810\", \"title\": \"Vitamin D: immune function, inflammation, infections and auto-immunity.\", \"year\": 2023, \"journal\": \"Paediatr Int Child Health\", \"publication_types\": [\"Review\", \"Journal Article\"], \"has_abstract\": true}, {\"pmid\": \"37916701\", \"title\": \"Vitamin D supplementation in a post-pandemic era: A narrative review.\", \"year\": 2023, \"journal\": \"S Afr Fam Pract (2004)\", \"publication_types\": [\"Review\", \"Journal Article\"], \"has_abstract\": true}, {\"pmid\": \"30675873\", \"title\": \"Vitamin D supplementation to prevent acute respiratory infections: individual participant data meta-analysis.\", \"year\": 2019, \"journal\": \"Health Technol Assess\", \"publication_types\": [\"Meta-Analysis\", \"Journal Article\"], \"has_abstract\": true}, {\"pmid\": \"39993397\", \"title\": \"Vitamin D supplementation to prevent acute respiratory infections: systematic review and meta-analysis of stratified aggregate data.\", \"year\": 2025, \"journal\": \"Lancet Diabetes Endocrinol\", \"publication_types\": [\"Journal Article\", \"Systematic Review\", \"Meta-Analysis\"], \"has_abstract\": true}, {\"pmid\": \"36287374\", \"title\": \"Vitamin D in the older population: a consensus statement.\", \"year\": 2023, \"journal\": \"Endocrine\", \"publication_types\": [\"Journal Article\", \"Review\", \"Consensus Statement\"], \"has_abstract\": true}, {\"pmid\": \"33798465\", \"title\": \"Vitamin D supplementation to prevent acute respiratory infections: a systematic review and meta-analysis of aggregate data from randomised controlled trials.\", \"year\": 2021, \"journal\": \"Lancet Diabetes Endocrinol\", \"publication_types\": [\"Journal Article\", \"Meta-Analysis\", \"Research Support, Non-U.S. Gov't\", \"Systematic Review\"], \"has_abstract\": true}], \"note\": \"Abstracts are retained for synthesis; no further fetch is required.\"}"
+        },
+        {
+          "role": "assistant",
+          "content": "",
+          "tool_calls": [
+            {
+              "id": "call-c40449a5-900d-4a68-8735-6844d0db3d78",
+              "type": "function",
+              "function": {
+                "name": "pubmed_search",
+                "arguments": "{\"query\": \"Vitamin D[All Fields] AND acute respiratory tract infection[All Fields] AND (placebo[All Fields] OR no treatment[All Fields])\", \"max_results\": 20}"
+              }
+            }
+          ]
+        },
+        {
+          "role": "tool",
+          "tool_call_id": "call-c40449a5-900d-4a68-8735-6844d0db3d78",
+          "name": "pubmed_search",
+          "content": "{\"executed_query\": \"(Vitamin D[All Fields] AND acute respiratory tract infection[All Fields] AND (placebo[All Fields] OR no treatment[All Fields]))\", \"total_matches\": 4, \"returned\": 4, \"results\": [{\"pmid\": \"28202713\", \"title\": \"Vitamin D supplementation to prevent acute respiratory tract infections: systematic review and meta-analysis of individual participant data.\", \"year\": 2017, \"journal\": \"BMJ\", \"publication_types\": [\"Journal Article\", \"Meta-Analysis\", \"Systematic Review\"], \"has_abstract\": true}, {\"pmid\": \"33444565\", \"title\": \"The effect of vitamin D supplementation on acute respiratory tract infection in older Australian adults: an analysis of data from the D-Health Trial.\", \"year\": 2021, \"journal\": \"Lancet Diabetes Endocrinol\", \"publication_types\": [\"Journal Article\", \"Research Support, Non-U.S. Gov't\"], \"has_abstract\": true}, {\"pmid\": \"37408991\", \"title\": \"A meta-analysis of the association between vitamin D supplementation and the risk of acute respiratory tract infection in the healthy pediatric group.\", \"year\": 2023, \"journal\": \"Front Nutr\", \"publication_types\": [\"Systematic Review\", \"Journal Article\"], \"has_abstract\": true}, {\"pmid\": \"34213544\", \"title\": \"Effects of Maternal Vitamin D Supplementation During Pregnancy and Lactation on Infant Acute Respiratory Infections: Follow-up of a Randomized Trial in Bangladesh.\", \"year\": 2021, \"journal\": \"J Pediatric Infect Dis Soc\", \"publication_types\": [\"Journal Article\", \"Randomized Controlled Trial\"], \"has_abstract\": true}], \"note\": \"Abstracts are retained for synthesis; no further fetch is required.\"}"
+        }
+      ],
+      "max_tokens": 16384,
+      "temperature": 0.1,
+      "tools": [
+        {
+          "type": "function",
+          "function": {
+            "name": "pubmed_search",
+            "description": "Search PubMed for biomedical literature. Returns matching records with PMID, title, year, and study design. Use MeSH terms and publication-type filters to target high-quality evidence.",
+            "parameters": {
+              "type": "object",
+              "properties": {
+                "query": {
+                  "type": "string",
+                  "description": "PubMed search expression. Field tags are supported, e.g. '\"Diabetes Mellitus, Type 2\"[MeSH Terms] AND tirzepatide'."
+                },
+                "max_results": {
+                  "type": "integer",
+                  "description": "How many records to retrieve (1-25)."
+                },
+                "date_from": {
+                  "type": "integer",
+                  "description": "Restrict to publications from this year onward.",
+                  "nullable": true
+                },
+                "pub_types": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "enum": [
+                      "Meta-Analysis",
+                      "Systematic Review",
+                      "Randomized Controlled Trial",
+                      "Practice Guideline",
+                      "Clinical Trial",
+                      "Observational Study",
+                      "Review",
+                      "Case Reports"
+                    ],
+                    "description": "PubMed publication types, ordered by evidence-hierarchy weight."
+                  },
+                  "description": "Restrict to these study designs. Omit to search all designs."
+                }
+              },
+              "propertyOrdering": [
+                "query",
+                "max_results",
+                "date_from",
+                "pub_types"
+              ],
+              "required": [
+                "query"
+              ],
+              "description": "Arguments for ``pubmed_search``."
+            }
+          }
+        },
+        {
+          "type": "function",
+          "function": {
+            "name": "mesh_lookup",
+            "description": "Map everyday or ambiguous wording onto official MeSH headings. Call this before searching when the question uses lay language.",
+            "parameters": {
+              "type": "object",
+              "properties": {
+                "term": {
+                  "type": "string",
+                  "description": "A word or phrase to map onto controlled MeSH vocabulary, e.g. 'sugar disease' or 'heart attack'."
+                }
+              },
+              "propertyOrdering": [
+                "term"
+              ],
+              "required": [
+                "term"
+              ],
+              "description": "Arguments for ``mesh_lookup``."
+            }
+          }
+        },
+        {
+          "type": "function",
+          "function": {
+            "name": "fetch_abstracts",
+            "description": "Retrieve the full abstracts of specific PMIDs returned by an earlier search, when titles alone are not enough to judge relevance.",
+            "parameters": {
+              "type": "object",
+              "properties": {
+                "pmids": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "minItems": 1,
+                  "maxItems": 25,
+                  "description": "PMIDs to retrieve full abstracts for; from a prior search."
+                }
+              },
+              "propertyOrdering": [
+                "pmids"
+              ],
+              "required": [
+                "pmids"
+              ],
+              "description": "Arguments for ``fetch_abstracts``."
+            }
+          }
+        }
+      ],
+      "tool_choice": "auto"
+    }
+  },
+  "response": {
+    "id": "chatcmpl-249650d9-ae61-46e0-b658-e9edab2f838a",
+    "choices": [
+      {
+        "index": 0,
+        "message": {
+          "content": null,
+          "tool_calls": [
+            {
+              "id": "call-a84ffbac-22fe-4bb4-81d7-e97335d9c2a4",
+              "type": "function",
+              "function": {
+                "name": "pubmed_search",
+                "arguments": "{\"max_results\":20,\"query\":\"(Vitamin D[MeSH Terms] OR vitamin D[All Fields]) AND (baseline[All Fields] OR status[All Fields]) AND Respiratory Tract Infections[MeSH Terms]\"}"
+              }
+            }
+          ],
+          "role": "assistant",
+          "reasoning_content": "Let me also search for the third planned search about baseline vitamin D status modifying the effect."
+        },
+        "finish_reason": "tool_calls",
+        "logprobs": null
+      }
+    ],
+    "created": 1786839863,
+    "model": "nvidia/nemotron-3.5-lightning-30b-a3b",
+    "service_tier": null,
+    "system_fingerprint": null,
+    "object": "chat.completion",
+    "usage": {
+      "prompt_tokens": 3298,
+      "completion_tokens": 97,
+      "total_tokens": 3395,
+      "prompt_tokens_details": {
+        "audio_tokens": null,
+        "cached_tokens": 2176
+      }
+    }
+  }
+}

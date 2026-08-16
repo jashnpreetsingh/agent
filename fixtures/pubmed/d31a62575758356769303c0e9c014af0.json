@@ -1,0 +1,46 @@
+{
+  "namespace": "pubmed",
+  "key": "d31a62575758356769303c0e9c014af0",
+  "meta": {
+    "endpoint": "esearch.fcgi"
+  },
+  "request": {
+    "endpoint": "esearch.fcgi",
+    "params": {
+      "db": "pubmed",
+      "term": "(\"Diabetes Mellitus, Type 2\"[MeSH Terms] AND (\"Hypoglycemic Agents\"[MeSH Terms] OR \"Sodium-Glucose Transporter 2 Inhibitors\"[MeSH Terms] OR \"Glucagon-Like Peptide-1 Receptor Agonists\"[MeSH Terms]) AND (\"Myocardial Infarction\"[MeSH Terms] OR \"Cardiovascular Diseases\"[MeSH Terms])) AND (\"Randomized Controlled Trial\"[Publication Type] OR \"Meta-Analysis\"[Publication Type]) AND (\"2018\"[Date - Publication] : \"3000\"[Date - Publication])",
+      "retmax": "12",
+      "retmode": "json",
+      "sort": "relevance",
+      "tool": "pubmed-evidence-agent",
+      "email": "agent@example.com"
+    }
+  },
+  "response": {
+    "header": {
+      "type": "esearch",
+      "version": "0.3"
+    },
+    "esearchresult": {
+      "count": "1027",
+      "retmax": "12",
+      "retstart": "0",
+      "idlist": [
+        "37952131",
+        "38785209",
+        "40162642",
+        "41406444",
+        "33441402",
+        "36041474",
+        "36351458",
+        "40169145",
+        "31422062",
+        "41203232",
+        "40156846",
+        "35210595"
+      ],
+      "translationset": [],
+      "querytranslation": "\"diabetes mellitus, type 2\"[MeSH Terms] AND (\"Hypoglycemic Agents\"[MeSH Terms] OR \"Sodium-Glucose Transporter 2 Inhibitors\"[MeSH Terms] OR \"Glucagon-Like Peptide-1 Receptor Agonists\"[MeSH Terms]) AND (\"Myocardial Infarction\"[MeSH Terms] OR \"Cardiovascular Diseases\"[MeSH Terms]) AND (\"Randomized Controlled Trial\"[Publication Type] OR \"Meta-Analysis\"[Publication Type]) AND 2018/01/01:3000/12/31[Date - Publication]"
+    }
+  }
+}

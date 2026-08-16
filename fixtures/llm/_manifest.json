@@ -1,0 +1,52 @@
+{
+  "entries": [
+    {
+      "key": "b086deb7d87759c7041e015d667cc614",
+      "purpose": "planner"
+    },
+    {
+      "key": "d61858444eba88b86da56b246ad0d762",
+      "purpose": "researcher.1"
+    },
+    {
+      "key": "2fa091752f58d6f7029e8078a6bdc43d",
+      "purpose": "researcher.2"
+    },
+    {
+      "key": "45a4743d84829861e3bdf75e5d5c6ca4",
+      "purpose": "researcher.3"
+    },
+    {
+      "key": "1c139974bf477ac35d372161277d0557",
+      "purpose": "researcher.4"
+    },
+    {
+      "key": "c2b5cc1b10606274eabaca8778e793a2",
+      "purpose": "embed.query"
+    },
+    {
+      "key": "e1c4ef4549fbb5f2c3f2473a825498da",
+      "purpose": "embed.passage"
+    },
+    {
+      "key": "a42ad58c3b5855bf08e12cfd157f2f6b",
+      "purpose": "synthesizer"
+    },
+    {
+      "key": "0626928cfd335fc28a824778d062260b",
+      "purpose": "critic"
+    },
+    {
+      "key": "9ead3676f6a431605e656707c3d57ecb",
+      "purpose": "judge"
+    },
+    {
+      "key": "702b5bf51071adbce987edfebab1c95c",
+      "purpose": "judge"
+    },
+    {
+      "key": "db12381acc33adde506cec540651da83",
+      "purpose": "judge"
+    }
+  ]
+}

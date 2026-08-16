@@ -1,0 +1,47 @@
+{
+  "namespace": "pubmed",
+  "key": "6d70b749aa9d11c086ab8c505111aab9",
+  "meta": {
+    "endpoint": "esearch.fcgi"
+  },
+  "request": {
+    "endpoint": "esearch.fcgi",
+    "params": {
+      "db": "pubmed",
+      "term": "(Vitamin D[All Fields] AND acute respiratory tract infection[All Fields] AND (placebo[All Fields] OR no treatment[All Fields]))",
+      "retmax": "12",
+      "retmode": "json",
+      "sort": "relevance",
+      "tool": "pubmed-evidence-agent",
+      "email": "agent@example.com"
+    }
+  },
+  "response": {
+    "header": {
+      "type": "esearch",
+      "version": "0.3"
+    },
+    "esearchresult": {
+      "count": "4",
+      "retmax": "4",
+      "retstart": "0",
+      "idlist": [
+        "28202713",
+        "33444565",
+        "37408991",
+        "34213544"
+      ],
+      "translationset": [
+        {
+          "from": "Vitamin D[All Fields]",
+          "to": "\"vitamin d\"[Supplementary Concept] OR \"vitamin d\"[All Fields] OR \"ergocalciferols\"[Supplementary Concept] OR \"ergocalciferols\"[All Fields] OR \"vitamin d\"[MeSH Terms] OR \"ergocalciferols\"[MeSH Terms]"
+        },
+        {
+          "from": "placebo[All Fields]",
+          "to": "\"placeboes\"[All Fields] OR \"placebos\"[Supplementary Concept] OR \"placebos\"[All Fields] OR \"placebo\"[All Fields] OR \"placebos\"[MeSH Terms]"
+        }
+      ],
+      "querytranslation": "(\"vitamin d\"[Supplementary Concept] OR \"vitamin d\"[All Fields] OR \"ergocalciferols\"[Supplementary Concept] OR \"ergocalciferols\"[All Fields] OR \"vitamin d\"[MeSH Terms] OR \"ergocalciferols\"[MeSH Terms]) AND \"acute respiratory tract infection\"[All Fields] AND (\"placeboes\"[All Fields] OR \"placebos\"[Supplementary Concept] OR \"placebos\"[All Fields] OR \"placebo\"[All Fields] OR \"placebos\"[MeSH Terms] OR \"no treatment\"[All Fields])"
+    }
+  }
+}
